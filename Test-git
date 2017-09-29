@@ -1,0 +1,17 @@
+class Tset
+{
+  public static void main(String[] args)
+  {
+    System.out.println("this a test");
+    String test="hello git"
+    writeTest(test);
+  }
+  
+  
+  
+  public String writeTest(String test)
+  {
+    test+="new"
+    System.out.println(test);
+  }
+}
