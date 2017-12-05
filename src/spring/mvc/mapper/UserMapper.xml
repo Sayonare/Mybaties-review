@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org//dtd/mybatis-3-mapper.dtd"
+        >
+
+
+<mapper namespace="spring.mvc/mapper.UserMapper">   <!-- 命名空间，名字可以随便取，只要不冲突即可-->
+        <!--对象映射，可以不写-->
+        <!-- 查询功能，resultType设置返回类型-->
+<select id="findAll" resultType="spring.mvc.domain.Person"> <!-- 书写SQl语句-->
+SELECT * FROM person
+</select>
+
+
+        </mapper>
