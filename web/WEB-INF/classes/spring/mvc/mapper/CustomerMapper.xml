@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org//dtd/mybatis-3-mapper.dtd"
+        >
+
+<mapper namespace="spring.mvc.mapper.CustomerMapper">
+    <resultMap id="customerRM" type="spring.mvc.domain.Customer">
+        <id property="id" column="ID"/>
+        <result property="name" column="NAME"/>
+    </resultMap>
+
+    <!-- 配置一对多关系-->
+    <resultMap id="spring.mvc.domain.Customer" type="customerOrdersRM" extends="customerRm">
+        <!-- 配置多的（N），property 属性就是实体中的 List 对象属性名称，ofType 属性就是集合元素的类型 -->
+        <collection property="orders" ofType="spring.mvc.domain.Orders">
+            <id property="id" column="ID"/>
+            <result property="sn" column="SN"/>
+            <result property="remark" column="REMARK"/>
+        </collection>
+    </resultMap>
+
+    <!-- 查询，关联关系 Map 作为查询条件 -->
+    <select id="find" parameterType="map" resultMap="customerOrderRM">
+        SELECT
+            c.name,sn,o.remark
+        FROM
+            (SELECT id ,name FROM customer) c
+        LEFT　JOIN
+            (SELECT id,sn,remark,customer_id FROM orders) o
+        ON c.id - o.customer_id
+        WHERE c.name = #{ customerName}
+    </select>
+</mapper>
